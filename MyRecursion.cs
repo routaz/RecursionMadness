@@ -5,14 +5,14 @@ class Item
     public List<Item>? itemsInside;
 }
 
-internal class Program
+internal class MyRecursion
 {
     private static void Main(string[] args)
     {
         var inventory = new List<Item>() {
             new Item() {
                 name = "Backbag",
-                itemsInside = new List<Item>() 
+                itemsInside = new List<Item>()
                 {
                     new Item()
                     {
@@ -23,7 +23,7 @@ internal class Program
                             new Item() { name = "Driving license" }
                         }
                     },
-                    new Item() 
+                    new Item()
                     {
                         name = "Pouch",
                         itemsInside = new List<Item>() {
@@ -39,7 +39,7 @@ internal class Program
 
             new Item() {
                 name = "Pockets",
-                itemsInside = new List<Item>() 
+                itemsInside = new List<Item>()
                 {
                     new Item() { name = "Coins" },
                     new Item() { name = "Keys" },
@@ -60,10 +60,10 @@ internal class Program
                     myRecurision(item.itemsInside, $"{myString}{item.name}->");
                 };
             }
-            
+
         }
 
-
+        //Desired output:
 
         /*
         Write a function that outputs all the contents of the "inventory" in the following format:
@@ -81,6 +81,22 @@ internal class Program
         Pockets
         Pockets->Coins
         Pockets->Keys
+       
+        //Another cool way to do it:
+
+        private static void PrintInventory(List<Item> inventory, string prefix = "")
+        {
+            foreach (var item in inventory)
+            {
+                Console.WriteLine(prefix + item.name);
+                if (item.itemsInside.Any())
+                {
+                    PrintInventory(item.itemsInside, prefix + item.name + "->");
+                }
+            }
+        }
+
         */
+
     }
 }
